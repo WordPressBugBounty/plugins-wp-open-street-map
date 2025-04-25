@@ -10,7 +10,7 @@ Tags: open street map, openstreet, map, openstreetmap, osm
 
 Requires at least: 3.5
 
-Tested up to: 6.6
+Tested up to: 6.8
 
 Stable tag: 1.31
 
