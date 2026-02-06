@@ -6,7 +6,7 @@ Plugin Name: WP Open Street Map
 
 Plugin URI: 
 
-Version: 1.31
+Version: 1.34
 
 Description: Create map with marker on Open Street Map 
 

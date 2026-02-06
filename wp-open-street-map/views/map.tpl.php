@@ -16,7 +16,7 @@
 
 		{
 
-			echo '<div class="marker" data-icon="'.esc_url($marker->icon).'" data-lon="'.(int)$marker->longitude.'" data-lat="'.(int)$marker->latitude.'" data-name="'.esc_attr($marker->name).'" data-description="'.wp_kses_post(nl2br($marker->description)).'"></div>';
+			echo '<div class="marker" data-icon="'.esc_url($marker->icon).'" data-lon="'.(int)$marker->longitude.'" data-lat="'.(int)$marker->latitude.'" data-name="'.esc_attr($marker->name).'" data-description="'.esc_attr(wp_kses_post(nl2br($marker->description))).'"></div>';
 
 		}
 

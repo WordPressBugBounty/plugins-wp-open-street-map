@@ -10,9 +10,9 @@ Tags: open street map, openstreet, map, openstreetmap, osm
 
 Requires at least: 3.5
 
-Tested up to: 6.8
+Tested up to: 6.9
 
-Stable tag: 1.31
+Stable tag: 1.34
 
 License: GPLv2 or later
 
