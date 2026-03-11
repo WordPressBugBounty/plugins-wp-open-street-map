@@ -6,7 +6,7 @@ Plugin Name: WP Open Street Map
 
 Plugin URI: 
 
-Version: 1.34
+Version: 1.35
 
 Description: Create map with marker on Open Street Map 
 
@@ -331,7 +331,7 @@ function wp_openstreetmaps() {
 
 									$coords = explode(',', $_POST['icon_coords'][$i]);
 
-									$query = $wpdb->prepare( $q, stripslashes_deep(sanitize_text_field($_POST['icon_name'][$i])), stripslashes_deep(sanitize_textarea_field($_POST['icon_description'][$i])), sanitize_text_field($_POST['icon_url'][$i]), floatval($coords[1]), floatval($coords[0]), intval($_GET['id']));
+									$query = $wpdb->prepare( $q, stripslashes_deep(sanitize_text_field($_POST['icon_name'][$i])), stripslashes_deep(wp_kses_post($_POST['icon_description'][$i])), sanitize_text_field($_POST['icon_url'][$i]), floatval($coords[1]), floatval($coords[0]), intval($_GET['id']));
 
 									$wpdb->query( $query );
 
