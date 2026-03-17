@@ -42,7 +42,8 @@
 
 
 
-	<input type="submit" value="<?php esc_attr_e('Save map', 'wp-open-street-map') ?>" class="button button-primary" /> <a href="<?php echo esc_url(admin_url('admin.php?page=wp_openstreetmaps')); ?>" class="button button-secondary"><?php esc_attr_e('Back to maps list', 'wp-open-street-map') ?></a>
+	<a href="<?php echo esc_url(admin_url('admin.php?page=wp_openstreetmaps')); ?>" class="button button-secondary"><?php esc_attr_e('Back to maps list', 'wp-open-street-map') ?></a>
+	<input type="submit" value="<?php esc_attr_e('Create my map and edit markers', 'wp-open-street-map') ?>" class="button button-primary" />
 
 
 

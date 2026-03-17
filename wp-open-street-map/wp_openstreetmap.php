@@ -6,7 +6,7 @@ Plugin Name: WP Open Street Map
 
 Plugin URI: 
 
-Version: 1.35
+Version: 1.40
 
 Description: Create map with marker on Open Street Map 
 
@@ -21,6 +21,11 @@ Text Domain: wp-open-street-map
 Domain Path: /languages
 
 */
+
+define('WP_OSM_DEFAULT_MAP_NAME', 'WP OSM');
+define('WP_OSM_DEFAULT_MAP_WIDTH', '100%');
+define('WP_OSM_DEFAULT_MAP_HEIGHT', '500px');
+define('WP_OSM_DEFAULT_MAP_ZOOM', 2);
 
 
 register_activation_hook( __FILE__, 'wp_openstreetmap_install' );
@@ -186,16 +191,33 @@ function wp_openstreetmaps() {
 	{
 
 		if(isset($_GET['task']))
-
 		{
 
 			switch($_GET['task'])
-
 			{
 
 
-
 				case 'new':
+
+					if(wp_verify_nonce($_REQUEST['_wpnonce'], 'edit_wposm'))
+					{
+						$query = "INSERT INTO ".$maps_table." (`name`, `width`, `height`, `zoom`, `latitude`, `longitude`)
+						VALUES (%s, %s, %s, %d, 0, 0)";
+
+						$query = $wpdb->prepare( $query, sanitize_text_field(WP_OSM_DEFAULT_MAP_NAME), sanitize_text_field(WP_OSM_DEFAULT_MAP_WIDTH), sanitize_text_field(WP_OSM_DEFAULT_MAP_HEIGHT), intval(WP_OSM_DEFAULT_MAP_ZOOM));
+
+						$wpdb->query( $query );
+
+						//on affiche toutes les maps
+
+						$maps = $wpdb->get_results("SELECT * FROM ".$maps_table." ORDER BY name");
+
+						include(plugin_dir_path( __FILE__ ) . 'views/maps.php');
+
+					}
+
+				break;
+
 
 				case 'edit':
 
@@ -217,7 +239,7 @@ function wp_openstreetmaps() {
 
 
 
-							$query = $wpdb->prepare( $query, $_POST['id'], stripslashes_deep(sanitize_text_field($_POST['name'])), sanitize_text_field($_POST['width']), sanitize_text_field($_POST['height']), intval($_POST['zoom']), floatval($_POST['latitude']), floatval($_POST['longitude']) );
+							$query = $wpdb->prepare( $query, $_POST['id'], stripslashes_deep(sanitize_text_field($_POST['name'])), sanitize_text_field($_POST['width']), sanitize_text_field($_POST['height']), intval($_POST['zoom']), intval($_POST['latitude']), intval($_POST['longitude']) );
 
 
 
@@ -235,7 +257,7 @@ function wp_openstreetmaps() {
 
 
 
-							//on affiche tous les graphs
+							//on affiche toutes les maps
 
 							$maps = $wpdb->get_results("SELECT * FROM ".$maps_table." ORDER BY name");
 
@@ -331,7 +353,7 @@ function wp_openstreetmaps() {
 
 									$coords = explode(',', $_POST['icon_coords'][$i]);
 
-									$query = $wpdb->prepare( $q, stripslashes_deep(sanitize_text_field($_POST['icon_name'][$i])), stripslashes_deep(wp_kses_post($_POST['icon_description'][$i])), sanitize_text_field($_POST['icon_url'][$i]), floatval($coords[1]), floatval($coords[0]), intval($_GET['id']));
+									$query = $wpdb->prepare( $q, stripslashes_deep(sanitize_text_field($_POST['icon_name'][$i])), stripslashes_deep(wp_kses_post(html_entity_decode($_POST['icon_description'][$i]))), sanitize_text_field($_POST['icon_url'][$i]), floatval($coords[1]), floatval($coords[0]), intval($_GET['id']));
 
 									$wpdb->query( $query );
 
@@ -377,7 +399,7 @@ function wp_openstreetmaps() {
 
 					else
 
-						echo '<p class="notice notice-error">Error nonce incorrect! <a href="'.esc_url(admin_url('admin.php?page=wp_openstreetmaps')).'">Go back to maps list</a></p>';
+						echo '<p class="notice notice-error">Missing ID or nonce incorrect! <a href="'.esc_url(admin_url('admin.php?page=wp_openstreetmaps')).'">Go back to maps list</a></p>';
 
 
 
