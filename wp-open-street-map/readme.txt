@@ -12,7 +12,7 @@ Requires at least: 3.5
 
 Tested up to: 6.9
 
-Stable tag: 1.40
+Stable tag: 1.41
 
 License: GPLv2 or later
 

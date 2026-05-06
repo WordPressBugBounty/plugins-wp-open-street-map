@@ -6,7 +6,7 @@ Plugin Name: WP Open Street Map
 
 Plugin URI: 
 
-Version: 1.40
+Version: 1.41
 
 Description: Create map with marker on Open Street Map 
 
@@ -33,7 +33,34 @@ register_activation_hook( __FILE__, 'wp_openstreetmap_install' );
 register_uninstall_hook(__FILE__, 'wp_openstreetmap_desinstall');
 
 
-function wp_openstreetmap_install() {
+function wp_openstreetmap_install($network_wide) {
+
+	global $wpdb;
+
+	if (is_multisite() && $network_wide) {
+
+		// get ids of all sites
+
+		$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+
+		foreach ($blogids as $blog_id) {
+
+			switch_to_blog($blog_id);
+
+			// create tables for each site
+			wp_openstreetmap_create_tables();
+
+			restore_current_blog();
+
+		}
+
+	}
+	else
+		wp_openstreetmap_create_tables();
+
+}
+
+function wp_openstreetmap_create_tables() {
 
 	global $wpdb;
 
@@ -68,11 +95,7 @@ function wp_openstreetmap_install() {
 
     ";
 
-
-
     dbDelta($sql);
-
-
 
     $sql = "
 
@@ -98,27 +121,45 @@ function wp_openstreetmap_install() {
 
     ";   
 
-
-
     dbDelta($sql);
-
-
 
 }
 
-
-
 function wp_openstreetmap_desinstall() {
 
+	if (is_multisite())	{
 
+		global $wpdb;
+
+		// get ids of all sites
+
+		$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+
+		foreach ($blogids as $blog_id) {
+
+			switch_to_blog($blog_id);
+
+			// create tables for each site
+
+			wp_openstreetmap_drop_tables();
+
+			restore_current_blog();
+
+		}
+
+	}
+	else
+
+		wp_openstreetmap_drop_tables();	
+}
+
+function wp_openstreetmap_drop_tables() {
 
 	global $wpdb;
 
 	$maps_table = $wpdb->prefix . "wp_openstreetmap";
 
 	$maps_markers_table = $wpdb->prefix . "wp_openstreetmap_markers";
-
-
 
 	//suppression des tables
 
@@ -127,15 +168,11 @@ function wp_openstreetmap_desinstall() {
 	$wpdb->query($sql);
 
 
-
     $sql = "DROP TABLE ".$maps_markers_table.";";   
 
 	$wpdb->query($sql);
 
-
-
 }
-
 
 
 add_action( 'admin_menu', 'register_wp_openstreetmap_menu' );
