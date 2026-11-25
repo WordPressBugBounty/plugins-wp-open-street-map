@@ -3,25 +3,18 @@
 /*
 
 Plugin Name: WP Open Street Map
-
 Plugin URI: 
-
-Version: 1.41
-
+Version: 1.50
 Description: Create map with marker on Open Street Map 
-
 Author: InfoD74
-
 Author URI: https://www.info-d-74.com/en/shop/
-
 Network: false
-
 Text Domain: wp-open-street-map
-
 Domain Path: /languages
 
 */
 
+define('WP_OSM_OPENLAYERS_DIR', 'js/OpenLayers/v10.11.0/');
 define('WP_OSM_DEFAULT_MAP_NAME', 'WP OSM');
 define('WP_OSM_DEFAULT_MAP_WIDTH', '100%');
 define('WP_OSM_DEFAULT_MAP_HEIGHT', '500px');
@@ -578,13 +571,15 @@ function display_wp_openstreetmap($atts) {
 
 			wp_enqueue_script( 'jquery' );
 
-			wp_enqueue_script( 'wp-openstreetmap-api',  plugins_url('js/OpenLayers/v6.5.0/build/ol.js', __FILE__)) ;
+			//wp_enqueue_script( 'wp-openstreetmap-api',  'https://cdn.jsdelivr.net/npm/ol@v10.11.0/dist/ol.js') ;
+			wp_enqueue_script( 'wp-openstreetmap-api',  plugins_url(WP_OSM_OPENLAYERS_DIR.'dist/ol.js', __FILE__)) ;
 
-			wp_enqueue_script( 'wp-openstreetmap-js', plugins_url( 'js/front.js', __FILE__ ));
+			wp_enqueue_script_module( 'wp-openstreetmap-js', plugins_url( 'js/front.js', __FILE__ ));
 
 			wp_enqueue_style( 'wp-openstreetmapFrontStylesheet', plugins_url('css/front.css', __FILE__) );
 
-			wp_enqueue_style( 'wp-openstreetmapPro-OL-CSS', plugins_url('js/OpenLayers/v6.5.0/css/ol.css', __FILE__));
+			//wp_enqueue_style( 'wp-openstreetmapPro-OL-CSS', 'https://cdn.jsdelivr.net/npm/ol@v10.11.0/ol.css');
+			wp_enqueue_style( 'wp-openstreetmapPro-OL-CSS', plugins_url(WP_OSM_OPENLAYERS_DIR.'ol.css', __FILE__));
 
 
 

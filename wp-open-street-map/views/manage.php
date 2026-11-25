@@ -82,11 +82,11 @@
 
 
 
-	<label for=""><?php esc_html_e('Name:', 'wp-open-street-map') ?></label> <input type="text" name="name" id="wp_osm_name" value="<?php echo esc_attr($marker->name) ?>" /><br />
+	<label for=""><?php esc_html_e('Name:', 'wp-open-street-map') ?></label> <input type="text" name="name" id="wp_osm_name" /><br />
 
 
 
-	<label for=""><?php esc_html_e('Description:', 'wp-open-street-map') ?></label> <textarea name="description" id="wp_osm_description"><?php echo esc_html($marker->description) ?></textarea><br />
+	<label for=""><?php esc_html_e('Description:', 'wp-open-street-map') ?></label> <textarea name="description" id="wp_osm_description"></textarea><br />
 
 	<p><strong class="notice notice-warning"><?php esc_html_e('Need advanced editor? Look at', 'wp-open-street-map') ?> <a href="https://www.info-d-74.com/en/produit/wp-openstreetmap-pro-plugin-wordpress/" target="_blank">WP OpenStreetMap Pro</a></strong></p>
 
@@ -216,9 +216,9 @@
 
 
 
-<link rel="stylesheet" href="<?php echo esc_url(plugins_url('js/OpenLayers/v6.5.0/css/ol.css', dirname(__FILE__))) ?>" type="text/css">
+<link rel="stylesheet" href="<?php echo esc_url(plugins_url(WP_OSM_OPENLAYERS_DIR.'ol.css', dirname(__FILE__))) ?>" type="text/css">
 
-<script src="<?php echo esc_url(plugins_url('js/OpenLayers/v6.5.0/build/ol.js', dirname(__FILE__))) ?>"></script>
+<script src="<?php echo esc_url(plugins_url(WP_OSM_OPENLAYERS_DIR.'dist/ol.js', dirname(__FILE__))) ?>"></script>
 
 <script>
 

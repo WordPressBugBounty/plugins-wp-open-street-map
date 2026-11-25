@@ -57,9 +57,9 @@
 
 
 
-<link rel="stylesheet" href="<?php echo esc_url(plugins_url('js/OpenLayers/v6.5.0/css/ol.css', dirname(__FILE__))) ?>" type="text/css">
+<link rel="stylesheet" href="<?php echo esc_url(plugins_url(WP_OSM_OPENLAYERS_DIR.'ol.css', dirname(__FILE__))) ?>" type="text/css">
 
-<script src="<?php echo esc_url(plugins_url('js/OpenLayers/v6.5.0/build/ol.js', dirname(__FILE__))) ?>"></script>
+<script src="<?php echo esc_url(plugins_url(WP_OSM_OPENLAYERS_DIR.'dist/ol.js', dirname(__FILE__))) ?>"></script>
 
 <script>
 

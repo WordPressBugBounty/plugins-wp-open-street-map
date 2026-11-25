@@ -1,3 +1,9 @@
+/*import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import { fromLonLat } from 'ol/proj';*/
+
 jQuery(document).ready(function(){
 
 	jQuery('.wp_osm').each(function(){
@@ -28,8 +34,8 @@ jQuery(document).ready(function(){
 	        ],
 	        view: new ol.View({
 	        	projection: 'EPSG:3857',
-	          	center: [  jQuery(this).attr('data-lat'), jQuery(this).attr('data-lon')],
-	          	zoom: jQuery(this).attr('data-zoom')
+	          	center: [ parseInt(jQuery(this).attr('data-lat')), parseInt(jQuery(this).attr('data-lon'))],
+	          	zoom: parseInt(jQuery(this).attr('data-zoom'))
 	        })
 	    });
 

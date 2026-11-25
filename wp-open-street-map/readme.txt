@@ -10,9 +10,9 @@ Tags: open street map, openstreet, map, openstreetmap, osm
 
 Requires at least: 3.5
 
-Tested up to: 7.1
+Tested up to: 7.1.5
 
-Stable tag: 1.41
+Stable tag: 1.50
 
 License: GPLv2 or later
 
@@ -28,8 +28,7 @@ Create easily maps with OpenStreetMap
 
 
 
-Create easily maps with OpenStreetMap  (compatible with multisite).
-[Here some examples](https://www.info-d-74.com/en/wp-openstreetmap-demos-2/)
+Create easily maps with OpenStreetMap. [Here some examples](https://www.info-d-74.com/en/wp-openstreetmap-demos-2/)
 
 A Pro version with more options is available: [https://www.info-d-74.com/en/produit/wp-openstreetmap-pro-plugin-wordpress/](https://www.info-d-74.com/en/produit/wp-openstreetmap-pro-plugin-wordpress/)
 
